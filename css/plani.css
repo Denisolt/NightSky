@@ -1,0 +1,18 @@
+#main {
+	text-align: center;
+	width: auto;
+	margin-bottom: 35%;
+}
+
+.unsupported {
+   font-family: Helvetica;
+   color: #F44;
+}
+
+table {
+   width: 75%;
+   margin: 1.5em auto 1.5em auto;
+   text-align: center;
+   font-family: Helvetica;
+   color: #A98;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+
+<title>NightSky | DeniShakh</title>
+
+<link type="text/css" rel="stylesheet" href="css/astro.css">
+<link type="text/css" rel="stylesheet" href="css/plani.css">
+<script type="text/javascript" src="js/astro.js"></script>
+<script type="text/javascript" src="js/observer.js"></script>
+<script type="text/javascript" src="js/skypos.js"></script>
+<script type="text/javascript" src="js/skydb.js"></script>
+<script type="text/javascript" src="js/plani.js"></script>
+
+<script type="text/javascript">
+window.addEventListener( "load", canvasApp, false );
+</script>
+</head>
+
+<body>
+
+<div id="main">
+
+<canvas id="planicanvas" width="800" height="800">
+</canvas>
+<table>
+   <tbody><tr>
+      <td colspan="3">Date and time <input id="user_date" size="36" onchange="get_user_obs()" value="Thu Feb 22 2018 14:13:07 GMT-0500" type="text">
+      <input id="user_dec" value="&lt;" onclick="dec_button()" type="button">
+      <input id="user_inc" value="&gt;" onclick="inc_button()" type="button">
+      <select name="increment" id="increment">
+         <option value="1" selected="selected">hour</option>
+         <option value="24">day</option>
+         <option value="168">week</option>
+         <option value="720">month</option>
+         <option value="8760">year</option>
+      </select>
+      <input id="user_now" value="Now" onclick="now_button()" type="button">
+      </td>
+   </tr>
+   <tr>
+      <td>North latitude <input id="user_lat" size="6" onchange="get_user_obs()" value="40" type="text"></td>
+      <td>East longitude <input id="user_lon" size="6" onchange="get_user_obs()" value="-75" type="text"></td>
+      <td><input id="geoloc" value="Use My Location" onclick="getGeoPos()" type="button"></td>
+   </tr>
+   <tr>
+      <td><input id="user_dsos" value="1" onchange="get_user_obs()" checked="checked" type="checkbox"> DSOs &nbsp; &nbsp;
+      <input id="user_starlab" value="0" onchange="get_user_obs()" type="checkbox"> Star names</td>
+      <td><input id="user_conline" value="1" onchange="get_user_obs()" checked="checked" type="checkbox"> Constellation lines</td>
+      <td><input id="user_conlab" value="0" onchange="get_user_obs()" type="checkbox"> Constellation labels</td>
+   </tr>
+
+
+</div>
+
+
+</body></html>
