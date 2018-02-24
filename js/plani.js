@@ -231,6 +231,16 @@ function refresh()
    draw_sky( context, canvas.width, canvas.height );
 }
 
+function saveImage()
+{
+   var link = document.createElement('a');
+   var canvas = document.getElementById("planicanvas");
+
+   link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+   link.download = 'image.png';
+   link.click();
+   window.URL.revokeObjectURL(url);
+}
 
 function set_user_obs()
 {
@@ -343,4 +353,3 @@ function getGeoPos()
    if ( navigator.geolocation )
       navigator.geolocation.getCurrentPosition( setGeoPos, errGeoPos );
 }
-

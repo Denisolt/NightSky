@@ -1,7 +1,6 @@
+
 #main {
-	text-align: center;
-	width: auto;
-	margin-bottom: 35%;
+   text-align: center;
 }
 
 .unsupported {
@@ -16,3 +15,6 @@ table {
    font-family: Helvetica;
    color: #A98;
 }
+#planicanvas{ 
+  width: 44%;
+  height:44%;
