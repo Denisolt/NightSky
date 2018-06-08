@@ -39,7 +39,7 @@ The project is under `DO I LOOK LIKE I GIVE A SHIT PUBLIC LICENSE`
 Do whatever you want. 
 
 ```
-			DO I LOOK LIKE I GIVE A SHIT PUBLIC LICENSE 
+	    DO I LOOK LIKE I GIVE A SHIT PUBLIC LICENSE 
                       Version 1, June 2018
   
   Copyright (C) 2013 Denisolt <denisolt@gmail.com> 
