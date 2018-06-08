@@ -30,7 +30,7 @@ too easy to even explain, fam.
 
 ## Result:
 
-![sample](/Users/admin/Desktop/projects/fun/NightSky/sample.png)
+![sample](https://github.com/Denisolt/NightSky/blob/master/sample.png?raw=true)
 
 ## License
 
