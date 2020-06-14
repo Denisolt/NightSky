@@ -6,6 +6,8 @@ Ernie Wright  2 June 2013, 26 May 2014
 ====================================================================== */
 
 var now = {};
+var immoons = new Image();
+immoons.src = "images/moons.png";
 var clipped = false;
 var ck_starlabels = false;
 var ck_conlabels = false;
@@ -17,7 +19,7 @@ function draw_star( context, s )
 {
    context.fillStyle = s.color;
    context.beginPath();
-   context.arc( s.pos.x, s.pos.y, s.radius* 1.3, 0, 2 * Math.PI );
+   context.arc( s.pos.x, s.pos.y, s.radius, 0, 2 * Math.PI );
    context.closePath();
    context.fill();
 }
@@ -117,7 +119,6 @@ function draw_line( context, s1, s2 )
    if ( s1.pos.visible && s2.pos.visible ) {
       context.beginPath();
       context.moveTo( s1.pos.x, s1.pos.y );
-      context.lineWidth = 0.4;
       context.lineTo( s2.pos.x, s2.pos.y );
       context.stroke();
    }
@@ -130,11 +131,11 @@ function draw_sky( context, w, h )
    find_planet( planet[ 2 ], null, now.jd );
    var azalt = skypos_transform( planet[ 2 ].pos, now, w, h );
    var bgcolor;
-   if ( azalt[ 1 ] > 0 ) bgcolor = "#191d29";              // 24, 36, 72
-   else if ( azalt[ 1 ] > -0.10472 ) bgcolor = "#191d29";  // 18, 27, 54
-   else if ( azalt[ 1 ] > -0.20944 ) bgcolor = "#191d29";  // 12, 18, 36
-   else if ( azalt[ 1 ] > -0.31416 ) bgcolor = "#191d29";  //  6,  9, 18
-   else bgcolor = "#191d29";
+   if ( azalt[ 1 ] > 0 ) bgcolor = "#182448";              // 24, 36, 72
+   else if ( azalt[ 1 ] > -0.10472 ) bgcolor = "#121B36";  // 18, 27, 54
+   else if ( azalt[ 1 ] > -0.20944 ) bgcolor = "#0C1224";  // 12, 18, 36
+   else if ( azalt[ 1 ] > -0.31416 ) bgcolor = "#060912";  //  6,  9, 18
+   else bgcolor = "#000000";
 
    /* ---- background, blue if sun up, black otherwise */
    context.clearRect( 0, 0, w, h );
@@ -142,7 +143,6 @@ function draw_sky( context, w, h )
    context.fillStyle = bgcolor;  // planet[ 2 ].pos.visible ? "#182448" : "#000000";
    context.beginPath();
    context.arc( w / 2, h / 2, w / 2, 0, 2 * Math.PI );
-
    context.closePath();
    context.fill();
    if ( !clipped ) {
@@ -150,13 +150,17 @@ function draw_sky( context, w, h )
       clipped = true;
    }
 
-   context.globalCompositeOperation = "xor";
+   context.globalCompositeOperation = "lighter";
    context.lineWidth = 1;
 
    /* ----- horizon labels */
    context.textBaseline = "middle";
    context.fillStyle = "#888";
    context.font = "12px Sans-Serif";
+   context.fillText( "N", ( w - 10 ) / 2, 9 );
+   context.fillText( "S", ( w - 10 ) / 2, h - 5 );
+   context.fillText( "E", 2, h / 2 );
+   context.fillText( "W", w - 14, h / 2 - 2 );
 
    /* ---- stars */
    var len = star.length;
@@ -201,7 +205,7 @@ function draw_sky( context, w, h )
          skypos_transform( planet[ i ].pos, now, w, h );
       }
       if ( planet[ i ].pos.visible )
-         draw_planet( context, );
+         draw_planet( context, planet[ i ] );
    }
    
    /* ---- DSOs */
@@ -231,16 +235,6 @@ function refresh()
    draw_sky( context, canvas.width, canvas.height );
 }
 
-function saveImage()
-{
-   var link = document.createElement('a');
-   var canvas = document.getElementById("planicanvas");
-
-   link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-   link.download = 'image.png';
-   link.click();
-   window.URL.revokeObjectURL(url);
-}
 
 function set_user_obs()
 {
@@ -335,6 +329,19 @@ function canvasApp()
 }
 
 
+function getIPGeoPos() {
+   $.getJSON( "http://ip-api.com/json/?callback=?", function( data ) {
+      console.log( data );
+      if ( data.status == 'success' ) {
+         now.setLatDegrees( data.lat );
+         now.setLonDegrees( data.lon );
+         set_user_obs();
+         refresh();
+      }
+   });
+}
+
+
 function setGeoPos( geopos ) {
    now.setLatDegrees( geopos.coords.latitude );
    now.setLonDegrees( geopos.coords.longitude );
@@ -342,14 +349,6 @@ function setGeoPos( geopos ) {
    refresh();
 }
 
-
-function errGeoPos( error ) {
-   alert( 'Geolocation error ' + error.code + ': ' + error.message );
-};
-
-
-function getGeoPos()
-{
-   if ( navigator.geolocation )
-      navigator.geolocation.getCurrentPosition( setGeoPos, errGeoPos );
+function getGeoPos() {
+   navigator.geolocation.getCurrentPosition( setGeoPos );
 }
