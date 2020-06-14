@@ -1,5 +1,12 @@
 # Night Sky
 
+---
+**NOTE**
+
+As you probably realized from comments in code, the majority of this code was written by Ernie Wright  (http://www.etwright.org/astro/plani.html). Me being young and foolish at the moment of putting this repo together, I have forgotten to give him shoutout. So, Ernie, if you are seeing this: I am sorry 😐 and thanks for the code. 
+
+---
+
 A way to avoid paying 50 bucks by using some js to generate an image of the night sky at specific time at a specific location. 
 
 I hope someone finds this useful.
